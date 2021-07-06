@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .board {
+            display: grid;
+            /* grid-template-columns: 1fr 1fr 1fr 1fr 1fr; */
+            width: 300px;
+        }
+
+        .board div {
+            height: 100px;
+            width: 100px;
+            border: 1px solid black;
+            line-height: 100px;
+        }
+
+        .ana {
+            background-color: aqua;
+            font-size: 50px;
+            text-align: center;
+        }
+
+        .win {
+            height: 50px;
+            width: 450px;
+            margin-top: 10px;
+            padding: 10px;
+            border: 1px solid black;
+            font-size: x-large;
+            text-align: center;
+            line-height: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="board"></div>
+    </div>
+</body>
+
+<!-- このばらばらなやつをたくさんつくって、たてにならべる -->
+<!-- それを５こつくる -->
+<!-- 判定はそれぞれの配列を参考にしたらいい、まとめなくてもいい -->
+
+<script>
+    // 要素が25個の配列をつくる
+    // const zenretu = Array(25);
+
+    // 要素が5個の配列を5個つくる
+    // CONSTでいいのかな？
+    const retu1 = Array(5);
+    const retu2 = Array(5);
+    const retu3 = Array(5);
+    const retu4 = Array(5);
+    const retu5 = Array(5);
+
+    // 配列の中身を途中確認
+    console.log(retu1);
+
+    // 中身に数字をいれる
+    // 1列目
+    for (let a = 0; a < 5; a++) {
+        retu1[a] = (Math.floor(Math.random() * 20 + 1));
+    }
+    // 2列目以降まだつくってない！
+    // 真ん中はどうするんだ？
+
+
+    // 5つの配列を1つに結合する
+    const zenretu = retu1.concat(retu2, retu3, retu4, retu5);
+
+    for (let i = 0; i < retu1.length; i++) {
+        // createElement()  HTML 要素を動的に生成する
+        const masu = document.createElement("div");
+        masu.textContent = retu1[i];
+
+        masu.addEventListener("click", () => {
+            // クリックすると穴があいた状態
+            masu.setAttribute("class", "ana");
+            masu.textContent = "◯"
+        })
+        // querySelector()  任意のHTML要素を検出・取得することができる
+        // appendChild()  親要素の末尾に要素を追加
+        document.querySelector(".board").appendChild(masu);
+    }
+
+
+    // 色がかわったところが並んだらビンゴになる
+    // クリックするたびにビンゴかどうか判定する
+    document.querySelector(".board").addEventListener("click", function () {
+        // 縦の列を配列にする
+        columnA = [zenretu[0][0], zenretu[0][1], zenretu[0][2], zenretu[0][3], zenretu[0][4]]
+
+        function checkWin(j) {
+            // 配列名.every(value===value)  TRUEかFALSEを返す
+            if (j.every(n => n === "◯")) {
+                const win = document.createElement("div");
+                win.textContent = "あがり！";
+                win.setAttribute("class", "win");
+                document.body.appendChild(win);
+            }
+        }
+        checkWin(columnA);
+    })
+
+</script>
+
+</html>

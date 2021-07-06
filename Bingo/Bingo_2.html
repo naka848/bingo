@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .board {
+            width: 600px;
+            text-align: center;
+        }
+
+        .board div {
+            height: 100px;
+            width: 100px;
+            border: 1px solid black;
+            line-height: 100px;
+
+        }
+
+        .ana {
+            font-size: 20px;
+            text-align: center;
+        }
+
+        .r1,
+        .r2,
+        .r3,
+        .r4,
+        .r5{
+            display: flex;
+            flex-direction: column;
+        }
+
+        .win {
+            height: 50px;
+            width: 450px;
+            margin-top: 10px;
+            padding: 10px;
+            border: 1px solid black;
+            font-size: 20px;
+            text-align: center;
+            line-height: 50px;
+        }
+    </style>
+</head>
+
+<body>
+        <div class="board"></div>
+</body>
+
+<!-- このばらばらなやつをたくさんつくってｍ、たてにたならべる -->
+<!-- それを５こつくる -->
+<!-- 判定はそれぞれの配列を参考にしたらいい、まとめなくてもいい -->
+
+<script>
+    // 要素が25個の配列をつくる
+    // const zenretu = Array(25);
+
+    // 要素が5個の配列を5個つくる
+    // CONSTでいいのかな？
+    const retu1 = Array(5);
+
+    // 配列の中身を途中確認
+    // console.log(retu1);
+
+    // 中身に数字をいれる
+    // 1列目
+    for (let a = 0; a < 5; a++) {
+        retu1[a] = (Math.floor(Math.random() * 20 + 1));
+        retu1[a].setAttribute("class", "r1");
+    }
+    // 2列目以降まだつくってない！
+    // 真ん中はどうするんだ？
+
+// クラスをつくってあげる！！！あとエラーでてるCORMNAがないって
+
+    // 5つの配列を1つに結合する
+    // const zenretu = retu1.concat(retu2, retu3, retu4, retu5);
+
+    for (let i = 0; i < retu1.length; i++) {
+        // createElement()  HTML 要素を動的に生成する
+        const masu = document.createElement("div");
+        masu.textContent = retu1[i];
+
+        masu.addEventListener("click", () => {
+            // クリックすると穴があいた状態
+            masu.setAttribute("class", "ana");
+            // masu.setAttribute("id", "r");
+            // retu1のグループにr1というクラス名をふる
+            // masu.setAttribute("class", "r1");
+            masu.textContent = "◯"
+        })
+        // querySelector()  任意のHTML要素を検出・取得することができる
+        // appendChild()  親要素の末尾に要素を追加
+        document.querySelector(".board").appendChild(masu);
+    }
+
+    // 2列目
+    const retu2 = Array(5);
+
+    for (let a = 0; a < 5; a++) {
+        retu2[a] = (Math.floor(Math.random() * 20 + 21));
+    }
+
+    for (let i = 0; i < retu2.length; i++) {
+        const masu = document.createElement("div");
+        masu.textContent = retu2[i];
+
+        masu.addEventListener("click", () => {
+            masu.setAttribute("class", "ana r2");
+            masu.textContent = "◯"
+        })
+        document.querySelector(".board").appendChild(masu);
+    }
+
+    // 3列目
+    const retu3 = Array(5);
+
+    for (let a = 0; a < 5; a++) {
+        retu3[a] = (Math.floor(Math.random() * 20 + 61));
+        // BINGOカードの真ん中に○を置く
+        if ( a == 2){
+            retu3[a] = "○";
+        }
+    }
+
+    for (let i = 0; i < retu3.length; i++) {
+        const masu = document.createElement("div");
+        masu.textContent = retu3[i];
+
+        masu.addEventListener("click", () => {
+            masu.setAttribute("class", "ana r3");
+            masu.textContent = "◯"
+        })
+        document.querySelector(".board").appendChild(masu);
+    }
+
+    // 4列目
+    const retu4 = Array(5);
+
+    for (let a = 0; a < 5; a++) {
+        retu4[a] = (Math.floor(Math.random() * 20 + 81));
+    }
+
+    for (let i = 0; i < retu4.length; i++) {
+        const masu = document.createElement("div");
+        masu.textContent = retu4[i];
+
+        masu.addEventListener("click", () => {
+            masu.setAttribute("class", "ana r4");
+            masu.textContent = "◯"
+        })
+        document.querySelector(".board").appendChild(masu);
+    }
+
+    // 5列目
+    const retu5 = Array(5);
+
+    for (let a = 0; a < 5; a++) {
+        retu5[a] = (Math.floor(Math.random() * 20 + 101));
+    }
+
+    for (let i = 0; i < retu5.length; i++) {
+        const masu = document.createElement("div");
+        masu.textContent = retu5[i];
+
+        masu.addEventListener("click", () => {
+            masu.setAttribute("class", "ana r5");
+            masu.textContent = "◯"
+        })
+        document.querySelector(".board").appendChild(masu);
+    }
+
+    // // 色がかわったところが並んだらビンゴになる
+    // // クリックするたびにビンゴかどうか判定する
+    // document.querySelector(".board").addEventListener("click", function () {
+    //     // 縦の列を配列にする
+    //     // columnA = [zenretu[0][0], zenretu[0][1], zenretu[0][2], zenretu[0][3], zenretu[0][4]]
+    //     // columnA = retu1[];
+
+    //     function checkWin(j) {
+    //         // 配列名.every(value===value)  TRUEかFALSEを返す
+    //         if (j.every(n => n === "◯")) {
+    //             const win = document.createElement("div");
+    //             win.textContent = "あがり！";
+    //             win.setAttribute("class", "win");
+    //             document.body.appendChild(win);
+    //         }
+    //     }
+    //     checkWin(columnA);
+    // })
+
+</script>
+
+</html>
