@@ -51,6 +51,8 @@ document.querySelector(".bingocard").addEventListener("click", function () {
 
     function checkWin(checkArray) {
         if (checkArray.every(n => n === "◯")) {
+            // checkListを全て埋める
+            checkList.fill("1");
             //  定数winAを定義する
             const winA = document.createElement("div");
             winA.textContent = "ビンゴ！";
